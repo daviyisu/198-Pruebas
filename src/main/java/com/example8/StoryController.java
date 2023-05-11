@@ -46,7 +46,7 @@ public class StoryController {
     }
 
 
-    @GetMapping("/storybytag/{tag_title}")
+    @GetMapping("/storiesbytag/{tag_title}")
     public List<Story> getStoriesByTag(@PathVariable String tag_title) {
         Tag tag = tagRepository.findByTitle(tag_title);
         List<StoryTags> story_tag_list = storyTagsRepository.findAllByTagId(tag.getId());

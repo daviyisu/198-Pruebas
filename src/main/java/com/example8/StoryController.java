@@ -65,5 +65,6 @@ public class StoryController {
     public ResponseEntity<String> handleNullPointerException() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Search did not show any results");
     }
+
 }
 

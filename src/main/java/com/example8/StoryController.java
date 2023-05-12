@@ -23,6 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/stories")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StoryController {
 
     @Autowired

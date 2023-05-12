@@ -7,11 +7,13 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Setter
@@ -43,6 +45,14 @@ public class StoryController {
         Optional<Story> story_to_return;
         story_to_return = storyRepository.findById(id);
         return story_to_return.get();
+    }
+
+    @Transactional
+    @DeleteMapping("/deletebyid/{id}")
+    public ResponseEntity<Story> deleteStoryById(@PathVariable Long id){
+        storyTagsRepository.deleteAllByStoryId(id);
+        storyRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 

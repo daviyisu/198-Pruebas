@@ -13,4 +13,6 @@ public interface StoryTagsRepository extends JpaRepository<StoryTags, Long> {
 
     StoryTags findByTagId(Long tag_id);
     List<StoryTags> findAllByTagId(Long tag_id);
+
+    void deleteAllByStoryId(Long id);
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoryService } from "./story.service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ export class AppComponent {
 
   title: string;
 
-  constructor() {
+  constructor(private storyService: StoryService) {
     this.title = '198 Story Database Application';
   }
 }

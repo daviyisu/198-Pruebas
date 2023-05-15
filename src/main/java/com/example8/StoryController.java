@@ -72,6 +72,12 @@ public class StoryController {
         return storyList;
     }
 
+    @PostMapping("/addstory")
+    public ResponseEntity<Story> addStory(@RequestBody Story story) {
+        storyRepository.save(story);
+        return ResponseEntity.ok(story);
+    }
+
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<String> handleNullPointerException() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Search did not show any results");

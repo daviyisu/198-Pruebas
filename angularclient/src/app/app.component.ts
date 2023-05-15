@@ -10,7 +10,7 @@ export class AppComponent {
 
   title: string;
 
-  constructor(private storyService: StoryService) {
+  constructor() {
     this.title = '198 Story Database Application';
   }
 }

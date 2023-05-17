@@ -10,12 +10,15 @@ import {StoryService} from "../story.service";
 })
 export class AddStoryFormComponent {
   story: Story;
+  tagsFromForm: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private storyService: StoryService) {
     this.story = new Story();
+    this.tagsFromForm = "";
   }
 
   onSubmit(){
+    this.story.setTagsFromForm(this.tagsFromForm);  //We transform the string received in the form in tags
     this.storyService.addStory(this.story).subscribe(response => this.router.navigate((['/stories'])));
   }
 }

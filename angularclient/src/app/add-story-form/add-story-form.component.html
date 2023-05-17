@@ -1,24 +1,21 @@
 <form (ngSubmit)="onSubmit()" #userForm="ngForm">
   <div class="form-group">
-    <label for="name">Story:</label>
+    <label for="content">Story:</label>
     <input type="text" [(ngModel)]="story.content"
            class="form-control"
-           id="name"
+           id="content"
            name="name"
            placeholder="Write here what happened"
            required #name="ngModel">
+    <br>
+    <label for="tags">Tags:</label>
+    <input type="text" [(ngModel)]="tagsFromForm"
+           class="form-control"
+           id="tags"
+           name="name"
+           placeholder="Write here the tags separated by comas"
+           required #name="ngModel">
   </div>
-
-<!--  <div class="form-group">-->
-<!--    <label for="email">Tags</label>-->
-<!--    <input type="text" [(ngModel)]="user.email"-->
-<!--           class="form-control"-->
-<!--           id="email"-->
-<!--           name="email"-->
-<!--           placeholder="Enter your email address"-->
-<!--           required #email="ngModel">-->
-<!--    <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div>-->
-<!--  </div>-->
   <button type="submit" [disabled]="!userForm.form.valid"
           class="btn btn-info">Submit</button>
 </form>

@@ -35,17 +35,34 @@ public class StoryController {
     @Autowired
     private final TagRepository tagRepository;
 
+    @Autowired
+    private TagController tagController;
+
 
     @GetMapping("/all")
     public List<Story> getStories() {
-        return storyRepository.findAll();
+        List<Story> storyList = storyRepository.findAll();
+        Story updatedStory;
+        for (int i=0; i<storyList.size(); i++){  //I get all the stories and then update them with their tags
+            updatedStory = storyList.get(i);
+            updatedStory.setTagList(tagController.getTagsByStory(updatedStory.getId()));
+            storyList.set(i,updatedStory);
+        }
+        return storyList;
     }
 
     @GetMapping("/{id}")
     public Story getStoryById(@PathVariable Long id) {
-        Optional<Story> story_to_return;
-        story_to_return = storyRepository.findById(id);
-        return story_to_return.get();
+        Story story_to_return = new Story();
+        Optional<Story> optionalStory;
+        optionalStory = storyRepository.findById(id);
+        if (optionalStory.isPresent()){
+            story_to_return = optionalStory.get();
+            List<Tag> tagList = tagController.getTagsByStory(story_to_return.getId());
+            story_to_return.setTagList(tagList);
+        }
+
+        return story_to_return;
     }
 
     @Transactional

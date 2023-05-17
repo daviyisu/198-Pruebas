@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {Story} from "../Story";
 import {StoryService} from "../story.service";
+import {TagsService} from "../tags.service";
+import {Tag} from "../Tag";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-story-list',
@@ -10,17 +13,17 @@ import {StoryService} from "../story.service";
 export class StoryListComponent {
   stories!: Story[];
 
-  constructor(private storyService: StoryService) {
+  constructor(private storyService: StoryService, private  tagService: TagsService) {
   }
 
   ngOnInit() {
-    this.storyService.findAll().subscribe(data => {
-      this.stories = data;
-    })
+    this.findAll();
   }
 
   findAll() {
-    this.storyService.findAll().subscribe(data => {this.stories = data;
+    this.storyService.findAll().subscribe(storyList => {
+      this.stories = storyList;
     })
   }
+
 }

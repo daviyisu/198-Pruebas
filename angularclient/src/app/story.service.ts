@@ -9,6 +9,7 @@ import {Story} from "./Story"
 export class StoryService {
 
   private storiesUrl: string;
+
   constructor(private http: HttpClient) {
     this.storiesUrl = "http://localhost:8080/stories/";
   }
@@ -16,6 +17,8 @@ export class StoryService {
   public findAll():Observable<Story[]>{
     return this.http.get<Story[]>(this.storiesUrl + "all");
   }
+
+
 
   public addStory(story: Story):Observable<Story>{
     return this.http.post<Story>(this.storiesUrl + "addstory", story);

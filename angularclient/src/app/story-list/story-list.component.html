@@ -1,5 +1,11 @@
 <tr *ngFor="let story of stories">
-  <td>{{story.id}}</td>
-  <td>{{story.content}}</td>
-<!--  <td>{{story.tagList}}</td>-->
+  <td>{{ story.id }}</td>
+  <td>{{ story.content }}</td>
+  <td>
+    <ul>
+      <ng-container *ngFor="let tag of story.tagList">
+        <li>{{ tag.title }}</li>
+      </ng-container>
+    </ul>
+  </td>
 </tr>

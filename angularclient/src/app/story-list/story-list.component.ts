@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Story} from "../Story";
 import {StoryService} from "../story.service";
-import {TagsService} from "../tags.service";
 
 
 @Component({

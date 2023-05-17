@@ -35,9 +35,9 @@ public class TagController {
         List<StoryTags> storyTagsList = storyTagsRepository.findAllByStoryId(story_id);
         List<Tag> tagList = new ArrayList<>();
         Optional<Tag> optionalTag;
-        for (int i = 0; i < storyTagsList.size(); i++){
-            optionalTag = tagRepository.findById(storyTagsList.get(i).getTagId());
-            if (optionalTag.isPresent()){
+        for (StoryTags storyTags : storyTagsList) {
+            optionalTag = tagRepository.findById(storyTags.getTagId());
+            if (optionalTag.isPresent()) {
                 tagList.add(optionalTag.get());
             }
         }

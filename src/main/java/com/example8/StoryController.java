@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Setter
@@ -80,8 +79,8 @@ public class StoryController {
         List<StoryTags> story_tag_list = storyTagsRepository.findAllByTagId(tag.getId());
         List<Story> storyList = new ArrayList<>();
         Optional<Story> optional_story;
-        for (int i = 0; i < story_tag_list.size(); i++) {
-            optional_story = storyRepository.findById(story_tag_list.get(i).getStoryId());
+        for (StoryTags storyTags : story_tag_list) {
+            optional_story = storyRepository.findById(storyTags.getStoryId());
             if (optional_story.isPresent()) {
                 storyList.add(optional_story.get());
             }

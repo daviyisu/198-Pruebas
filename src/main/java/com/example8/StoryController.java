@@ -96,19 +96,18 @@ public class StoryController {
         for (int i=0; i<story.getTagList().size(); i++){
             Tag tagToAdd = this.tagRepository.findByTitle(story.getTagList().get(i).getTitle());
             if (tagToAdd == null) {
-                allTagsExists = false;
+                allTagsExists = false;  //If one tag does not exist, we cancel the whole operation
                 break;
             }else {
                 checkedTags.add(tagToAdd);
             }
         }
-        if (allTagsExists){
+        if (allTagsExists){  //If all tags exist, we go through the checked list to save them and the story
             Story savedStory = this.storyRepository.save(story);
             for (int i=0; i<checkedTags.size(); i++){
                 StoryTags storyTagToAdd = new StoryTags();
                 storyTagToAdd.setStoryId(savedStory.getId());
                 storyTagToAdd.setTagId(checkedTags.get(i).getId());
-                //System.out.println("Tag id es: " + story.getTagList().get(i).getId());
                 this.storyTagsRepository.save(storyTagToAdd);
             }
         } else {

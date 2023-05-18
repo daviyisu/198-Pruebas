@@ -13,7 +13,7 @@ import lombok.*;
 public class StoryTags {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "story_id")

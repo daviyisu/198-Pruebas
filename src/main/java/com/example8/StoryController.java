@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -90,7 +91,29 @@ public class StoryController {
 
     @PostMapping("/addstory")
     public ResponseEntity<Story> addStory(@RequestBody Story story) {
-        storyRepository.save(story);
+        boolean allTagsExists = true;
+        List<Tag> checkedTags = new ArrayList<>();
+        for (int i=0; i<story.getTagList().size(); i++){
+            Tag tagToAdd = this.tagRepository.findByTitle(story.getTagList().get(i).getTitle());
+            if (tagToAdd == null) {
+                allTagsExists = false;
+                break;
+            }else {
+                checkedTags.add(tagToAdd);
+            }
+        }
+        if (allTagsExists){
+            Story savedStory = this.storyRepository.save(story);
+            for (int i=0; i<checkedTags.size(); i++){
+                StoryTags storyTagToAdd = new StoryTags();
+                storyTagToAdd.setStoryId(savedStory.getId());
+                storyTagToAdd.setTagId(checkedTags.get(i).getId());
+                //System.out.println("Tag id es: " + story.getTagList().get(i).getId());
+                this.storyTagsRepository.save(storyTagToAdd);
+            }
+        } else {
+            return ResponseEntity.badRequest().build();  //We return a 400 error code
+        }
         return ResponseEntity.ok(story);
     }
 

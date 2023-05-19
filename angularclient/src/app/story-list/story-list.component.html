@@ -1,19 +1,18 @@
-<mat-grid-list cols="3" rowHeight="3:1">
-  <tr *ngFor="let story of stories">
-    <mat-card class="story-card">
-      <mat-card-content>
-        <p>
-          {{ story.content }}
-        </p>
-      </mat-card-content>
-      <ul>
-        <ng-container class="ng-container" *ngFor="let tag of story.tagList">
-          <mat-chip class="tag-chip">
-            {{ tag.title }}
-          </mat-chip>
-        </ng-container>
-      </ul>
-
-    </mat-card>
-  </tr>
+<mat-grid-list cols="3" rowHeight="4:3" >
+  <mat-grid-tile *ngFor="let story of stories">
+  <mat-card class="story-card">
+    <mat-card-content>
+      <p>
+        {{ story.content }}
+      </p>
+    </mat-card-content>
+    <ul>
+      <ng-container class="ng-container" *ngFor="let tag of story.tagList">
+        <mat-chip class="tag-chip">
+          {{ tag.title }}
+        </mat-chip>
+      </ng-container>
+    </ul>
+  </mat-card>
+  </mat-grid-tile>
 </mat-grid-list>

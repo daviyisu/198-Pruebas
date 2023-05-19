@@ -92,7 +92,17 @@ public class StoryController {
     @PostMapping("/addstory")
     public ResponseEntity<Story> addStory(@RequestBody Story story) {
         boolean allTagsExists = true;
+        for (int i=0; i<story.getTagList().size(); i++){
+            System.out.println(story.getTagList().size());
+            System.out.println(story.getTagList().get(i).toString());
+        }
         List<Tag> checkedTags = new ArrayList<>();
+
+        if(story.getTagList().isEmpty()){  //If there are not any tags, we simply add the story
+            this.storyRepository.save(story);
+            return ResponseEntity.ok(story);
+        }
+
         for (int i=0; i<story.getTagList().size(); i++){
             Tag tagToAdd = this.tagRepository.findByTitle(story.getTagList().get(i).getTitle());
             if (tagToAdd == null) {
@@ -104,10 +114,10 @@ public class StoryController {
         }
         if (allTagsExists){  //If all tags exist, we go through the checked list to save them and the story
             Story savedStory = this.storyRepository.save(story);
-            for (int i=0; i<checkedTags.size(); i++){
+            for (Tag checkedTag : checkedTags) {
                 StoryTags storyTagToAdd = new StoryTags();
                 storyTagToAdd.setStoryId(savedStory.getId());
-                storyTagToAdd.setTagId(checkedTags.get(i).getId());
+                storyTagToAdd.setTagId(checkedTag.getId());
                 this.storyTagsRepository.save(storyTagToAdd);
             }
         } else {

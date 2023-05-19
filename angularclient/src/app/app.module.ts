@@ -7,6 +7,11 @@ import {HttpClientModule} from "@angular/common/http";
 import { StoryListComponent } from './story-list/story-list.component';
 import { AddStoryFormComponent } from './add-story-form/add-story-form.component';
 import {FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatGridListModule} from "@angular/material/grid-list";
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,11 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatChipsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

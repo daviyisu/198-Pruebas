@@ -68,6 +68,7 @@ public class StoryController {
     @Transactional
     @DeleteMapping("/deletebyid/{id}")
     public ResponseEntity<Story> deleteStoryById(@PathVariable Long id){
+        System.out.println("gffswghggg");
         storyTagsRepository.deleteAllByStoryId(id);
         storyRepository.deleteById(id);
         return ResponseEntity.noContent().build();

@@ -5,10 +5,6 @@ export class Story {
   content!: string;
   tagList!: Tag[];
 
-  getId(): String {
-    return this.id
-  }
-
   setTags(tagsToAdd: Tag[]): void {
     this.tagList = tagsToAdd;
   }

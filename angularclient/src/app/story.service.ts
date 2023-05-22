@@ -23,4 +23,8 @@ export class StoryService {
   public addStory(story: Story):Observable<Story>{
     return this.http.post<Story>(this.storiesUrl + "addstory", story);
   }
+
+  public deleteStory(story: Story):Observable<Object>{
+    return this.http.delete<Story>(`${this.storiesUrl}deletebyid/${story.id}`);
+  }
 }

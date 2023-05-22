@@ -24,4 +24,10 @@ export class StoryListComponent {
     })
   }
 
+  deleteStory(story_to_delete: Story){
+    this.storyService.deleteStory(story_to_delete).subscribe( {next: () => {
+      this.stories = this.stories.filter((story) => story.id != story_to_delete.id)
+    }});
+}
+
 }

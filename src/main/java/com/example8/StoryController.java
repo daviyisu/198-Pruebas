@@ -99,9 +99,9 @@ public class StoryController {
         for (Tag t : tagList){
             System.out.println(t.getTitle());
         }
-        /*for (Tag tag : tagList){
-            storyTagsList.addAll(this.storyTagsRepository.findAllByTagId(tag.getId()));
-        }*/
+        System.out.println("1st parameter will be: " + tagList.get(0).getId());
+        System.out.println("2nd parameter will be: " + tagList.get(1).getId());
+        storyTagsList.addAll(this.storyTagsRepository.findAllByTagsId(tagList.get(0).getId(), tagList.get(1).getId()));
 
         for (StoryTags story : storyTagsList){
             storyList.add(this.storyRepository.findById(story.getStoryId()).get());

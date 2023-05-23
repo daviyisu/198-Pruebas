@@ -90,6 +90,25 @@ public class StoryController {
         return storyList;
     }
 
+    @GetMapping("/storiesbytaglist") //TODO ARREGLA ESTO
+    public List<Story> getStoriesByTagList(@RequestParam("tags_title_list") List<String> tags_title_list) {
+        System.out.println(tags_title_list);
+        List<Story> storyList = new ArrayList<>();
+        List<StoryTags> storyTagsList = new ArrayList<>();
+        List<Tag> tagList = this.tagRepository.findAllByTitleIn(tags_title_list);
+        for (Tag t : tagList){
+            System.out.println(t.getTitle());
+        }
+        /*for (Tag tag : tagList){
+            storyTagsList.addAll(this.storyTagsRepository.findAllByTagId(tag.getId()));
+        }*/
+
+        for (StoryTags story : storyTagsList){
+            storyList.add(this.storyRepository.findById(story.getStoryId()).get());
+        }
+        return storyList;
+    }
+
     @PostMapping("/addstory")
     public ResponseEntity<Story> addStory(@RequestBody Story story) {
         boolean allTagsExists = true;

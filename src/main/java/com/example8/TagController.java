@@ -43,4 +43,9 @@ public class TagController {
         }
         return tagList;
     }
+
+    @GetMapping("/all")
+    public List<Tag> findAll(){
+        return this.tagRepository.findAll();
+    }
 }

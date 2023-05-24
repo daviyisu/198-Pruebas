@@ -15,4 +15,8 @@ export class TagsService {
   public findByStory(storyId: String):Observable<Tag[]>{
     return this.http.get<Tag[]>(this.tagsUrl + `tagsbystory/${storyId}`)
   }
+
+  public findAll():Observable<Tag[]>{
+    return this.http.get<Tag[]>(this.tagsUrl + 'all')
+  }
 }

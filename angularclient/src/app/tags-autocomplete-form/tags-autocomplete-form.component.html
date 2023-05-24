@@ -1,0 +1,23 @@
+<form>
+  <mat-form-field class="chip-list">
+    <mat-label>Search tags</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Fruit selection">
+      <mat-chip-row *ngFor="let tag of tags" (removed)="remove(tag)">
+        {{tag}}
+        <button matChipRemove [attr.aria-label]="'remove ' + tag">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input placeholder="Choose the tags..." #tagsInput [formControl]="tagsCtrl"
+           [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           (matChipInputTokenEnd)="add($event)"/>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+        {{tag}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+

@@ -11,15 +11,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { TagsAutocompleteFormComponent } from './tags-autocomplete-form/tags-autocomplete-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StoryListComponent,
-    AddStoryFormComponent
+    AddStoryFormComponent,
   ],
   imports: [
+    TagsAutocompleteFormComponent,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -27,7 +32,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
     BrowserAnimationsModule,
     MatCardModule,
     MatChipsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    MatIconModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

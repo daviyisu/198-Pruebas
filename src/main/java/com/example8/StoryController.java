@@ -90,21 +90,13 @@ public class StoryController {
         return storyList;
     }
 
-    @GetMapping("/storiesbytaglist") //TODO ARREGLA ESTO
+    @GetMapping("/storiesbytaglist")
     public List<Story> getStoriesByTagList(@RequestParam("tags_title_list") List<String> tags_title_list) {
-        System.out.println(tags_title_list);
         List<Story> storyList = new ArrayList<>();
-        List<StoryTags> storyTagsList = new ArrayList<>();
-        List<Tag> tagList = this.tagRepository.findAllByTitleIn(tags_title_list);
-        for (Tag t : tagList){
-            System.out.println(t.getTitle());
-        }
-        System.out.println("1st parameter will be: " + tagList.get(0).getId());
-        System.out.println("2nd parameter will be: " + tagList.get(1).getId());
-        storyTagsList.addAll(this.storyTagsRepository.findAllByTagsId(tagList.get(0).getId(), tagList.get(1).getId()));
-
-        for (StoryTags story : storyTagsList){
-            storyList.add(this.storyRepository.findById(story.getStoryId()).get());
+        List<Long> storyIdList = new ArrayList<>();
+        storyIdList.addAll(this.storyRepository.findAllByTagsId(tags_title_list, tags_title_list.size()));
+        for (Long story_id : storyIdList){
+            storyList.add(this.storyRepository.findById(story_id).get());
         }
         return storyList;
     }

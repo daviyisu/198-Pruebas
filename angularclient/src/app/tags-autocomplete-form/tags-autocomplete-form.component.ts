@@ -8,6 +8,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {map, Observable, startWith} from "rxjs";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {TagsService} from "../tags.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-tags-autocomplete-form',
@@ -23,6 +24,7 @@ import {TagsService} from "../tags.service";
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    RouterLink,
   ],
 })
 export class TagsAutocompleteFormComponent implements OnInit{

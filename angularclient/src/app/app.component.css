@@ -1,3 +1,19 @@
-.list-inline-item {
+#kanji-logo {
+  width: 40%;
+}
 
+ul {
+  display: flex;
+  justify-content: center;
+}
+
+
+li {
+  display: flex;
+  align-items: center;
+}
+
+#li-kanji {
+  display: flex;
+  justify-content: center;
 }

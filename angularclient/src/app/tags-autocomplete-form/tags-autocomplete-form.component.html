@@ -1,5 +1,5 @@
 <div class = "browser">
-<form>
+<form (ngSubmit)="onSubmit()" #searchForm="ngForm">
   <mat-form-field class="chip-list">
     <mat-label>Search tags</mat-label>
     <mat-chip-grid #chipGrid aria-label="Fruit selection">
@@ -20,8 +20,11 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <div class="browser-button">
+  <button type="submit" [disabled]="this.tags.length == 0" class="btn btn-info">Search stories by tags</button>
+  </div>
 </form>
-<a routerLink="/addstory" class="btn btn-info">Search stories by tags</a>
+
 
 </div>
 

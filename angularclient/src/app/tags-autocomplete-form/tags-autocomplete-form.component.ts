@@ -9,6 +9,7 @@ import {map, Observable, startWith} from "rxjs";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {TagsService} from "../tags.service";
 import {RouterLink} from "@angular/router";
+import {StoryService} from "../story.service";
 
 @Component({
   selector: 'app-tags-autocomplete-form',
@@ -36,15 +37,22 @@ export class TagsAutocompleteFormComponent implements OnInit{
 
   @ViewChild('tagsInput') tagsInput: ElementRef<HTMLInputElement> | undefined;
 
-  constructor(private tagService: TagsService) {
+  constructor(private tagService: TagsService, private storyService: StoryService) {
     this.filteredTags = this.tagsCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allTags.slice())),
+      map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice())),
     );
   }
 
   ngOnInit() {
     this.findAll();
+  }
+
+  onSubmit(){
+    console.log(this.tags);
+    this.storyService.findByTagList(this.tags).subscribe( data => {
+      console.log(data);
+    })
   }
 
   findAll(){
@@ -58,7 +66,7 @@ export class TagsAutocompleteFormComponent implements OnInit{
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add our tag
     if (value) {
       this.tags.push(value);
     }
@@ -69,8 +77,8 @@ export class TagsAutocompleteFormComponent implements OnInit{
     this.tagsCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.tags.indexOf(fruit);
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
       this.tags.splice(index, 1);
@@ -87,6 +95,6 @@ export class TagsAutocompleteFormComponent implements OnInit{
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allTags.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 }

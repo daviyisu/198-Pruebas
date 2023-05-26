@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Story} from "./Story"
 
@@ -18,7 +18,10 @@ export class StoryService {
     return this.http.get<Story[]>(this.storiesUrl + "all");
   }
 
-
+public findByTagList(tags: string[]):Observable<Story[]>{
+    const params = { tags_title_list: tags };
+    return this.http.get<Story[]>(this.storiesUrl + 'storiesbytaglist', { params })
+}
 
   public addStory(story: Story):Observable<Story>{
     return this.http.post<Story>(this.storiesUrl + "addstory", story);

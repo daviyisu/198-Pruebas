@@ -1,5 +1,5 @@
 # 198-Pruebas
-Este repositorio lo hago porque no sé usar las ramas en git
+
 
 # Docker
 To run the container execute, from the project's root folder:<br>
